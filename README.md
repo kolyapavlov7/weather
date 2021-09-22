@@ -8,7 +8,7 @@ weather тестовое задание
   sudo -u postgres psql
   CREATE ROLE <role> PASSWORD '<password>' LOGIN;
   CREATE DATABASE <db_name> OWNER <role>;
-  \c weather;
+  \c <db_name>;
 
 - Установить настройки
   Переименовать файл settings/local.py.example.py в settings/local.py 
