@@ -37,7 +37,10 @@ GRANT USAGE, SELECT ON SEQUENCE weather_id_seq TO <role>;
 ```
 
 - Перейти в папку проекта и установить настройки проекта
-- - Скопировать файл ```settings/local.py.example.py``` в ```settings/local.py```
+- - Перейти в папку проекта 
+```cd weather```
+- - Создать файл локальных настроек
+```cp settings/local.py.example.py settings/local.py```
 - - Заполнить в файле ```settings/local.py``` настройки базы данны и ключ к апи ```openweathermap```
 
 - Запустить сервер
