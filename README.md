@@ -1,13 +1,21 @@
 # weather
 weather тестовое задание
 
-sudo -u postgres psql
-create role and database 
+- Склонировать проект
+  git clone git@github.com:kolyapavlov7/weather.git
 
-git clone git@github.com:kolyapavlov7/weather.git
-Переименуйте файл settings/local.py.example.py в settings/local.py и заполните настройки
+- Создать пользователя и базу данных
+  sudo -u postgres psql
+  CREATE ROLE <role> PASSWORD '<password>' LOGIN;
+  CREATE DATABASE <db_name> OWNER <role>;
+  \c weather;
 
-python3.8 main.py
+- Установить настройки
+  Переименовать файл settings/local.py.example.py в settings/local.py 
+  Заполнить настройки базы данны и ключ апи
 
-Перейти на страницу:
-http://0.0.0.0:8080/weather?country_code=RU&city=Moscow&date=22.09.2022T14:00
+- Запустить сервер
+  python3.8 main.py
+
+- Перейти на страницу:
+  http://0.0.0.0:8080/weather?country_code=RU&city=Moscow&date=22.09.2022T14:00
