@@ -37,8 +37,8 @@ GRANT USAGE, SELECT ON SEQUENCE weather_id_seq TO <role>;
 ```
 
 - Установить настройки проекта
-- - Переименовать файл settings/local.py.example.py в settings/local.py 
-- - Заполнить настройки базы данны и ключ апи
+- - Переименовать файл ```settings/local.py.example.py``` в ```settings/local.py```
+- - Заполнить в файле ```settings/local.py``` настройки базы данны и ключ апи
 
 - Запустить сервер
 ```  python3.8 main.py ```
