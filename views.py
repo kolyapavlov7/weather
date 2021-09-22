@@ -1,13 +1,11 @@
-import psycopg2
-import asyncio
 import json
 
-from psycopg2 import sql
-from psycopg2.extras import DictCursor
 from aiohttp import web
+from dateutil.parser import parse
 
 from api import OpenWeatherMapApi, WeatherDBApi
 from settings import DATABASES, OPEN_WEATHER_MAP_API_KEY
+
 
 async def weather_view(request):
     country_code = request.rel_url.query.get('country_code', '')
@@ -20,16 +18,26 @@ async def weather_view(request):
     country_code = country_code.lower()
     city = city.lower()
 
+    try:
+        parse(date)
+    except ValueError:
+        return web.Response(text='Не удалось распознать дату!')
+
     db_api = WeatherDBApi(DATABASES['MAIN'])
     weather_from_db = db_api.get_weather(country_code, city, date)
     if weather_from_db is None:
         weather_api = OpenWeatherMapApi(token=OPEN_WEATHER_MAP_API_KEY)
         weather_data = await weather_api.weather(country_code, city, date)
+
+        if weather_data is None:
+            return web.Response(text='Не удалось найти погоду за указанный день!')
+
+        is_success_response = isinstance(weather_data, dict) and weather_data.get('cod', 200) == 200
         weather_data = json.dumps(weather_data)
-        db_api.set_weather(country_code, city, date, weather_data)
+        if is_success_response:
+            db_api.set_weather(country_code, city, date, weather_data)
+
     else:
         weather_data = json.dumps(weather_from_db)
 
     return web.Response(text=weather_data)
-    
-

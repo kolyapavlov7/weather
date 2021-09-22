@@ -3,6 +3,7 @@ import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import DictCursor
 
+
 class WeatherDBApi:
     def __init__(self, db_conf):
         self.db_conf = db_conf
@@ -48,7 +49,7 @@ class WeatherDBApi:
             
     def insert_city(self, *args):
         query = '''INSERT INTO cities (country_id, name) VALUES ({}, '{}');'''.format(*args)
-        row = self.__sql(query, response=False)
+        self.__sql(query, response=False)
         return self.get_city_id(*args)
             
     def get_weather_data(self, *args):
@@ -59,7 +60,7 @@ class WeatherDBApi:
             
     def insert_weather(self, city_id, date, data):
         query = '''INSERT INTO weather (city_id, date, data) VALUES ({}, '{}', '{}');'''.format(city_id, date, data)
-        row = self.__sql(query, response=False)
+        self.__sql(query, response=False)
         return self.get_weather_data(city_id, date)
         
     def __sql(self, query, response=True, single=True):

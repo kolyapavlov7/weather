@@ -24,12 +24,21 @@ class OpenWeatherMapApi:
         
     async def __start(self):
         coords_data = await self._coords()
+        if (isinstance(coords_data, dict) and coords_data.get('cod', 200) != 200) or not coords_data:
+            return coords_data
         coords_data = coords_data[0]
+
         weather_data = await self._weather(coords_data['lat'], coords_data['lon'])
-        item = None
+        if (isinstance(weather_data, dict) and weather_data.get('cod', 200) != 200) or not weather_data:
+            return weather_data
+
         for item in weather_data.get('hourly', []):
             if item.get('dt') == self.timestamp:
                 break
+        else:
+            item = None
+        print(self.timestamp)
+        print(item)
         return item
 
     def _weather(self, lat, lon):
