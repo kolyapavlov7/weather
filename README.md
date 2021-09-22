@@ -41,4 +41,4 @@ weather тестовое задание
   python3.8 main.py
 
 - Перейти на страницу:
-  http://0.0.0.0:8080/weather?country_code=RU&city=Moscow&date=23.09.2022T12:00
+  http://0.0.0.0:8080/weather?country_code=RU&city=Moscow&date=23.09.2021T12:00
