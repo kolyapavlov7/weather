@@ -2,23 +2,10 @@
 weather тестовое задание
 
 sudo -u postgres psql
+create role and database 
 
-create role and data_base 
 git clone git@github.com:kolyapavlov7/weather.git
-Создать файл settings.py в корне проекта
-и заполнить настройки:
-
-OPEN_WEATHER_MAP_API_KEY = '<api_key>'
-DATABASES = {
-    'MAIN': {
-        'dbname': '<dbname>',
-        'user': '<user>',
-        'password': '<password>',
-        'host': '<host>',
-    }
-}
-
-Создать таблицы 
+Переименуйте файл settings/local.py.example.py в settings/local.py и заполните настройки
 
 python3.8 main.py
 
