@@ -36,9 +36,9 @@ GRANT USAGE, SELECT ON SEQUENCE cities_id_seq TO <role>;
 GRANT USAGE, SELECT ON SEQUENCE weather_id_seq TO <role>;
 ```
 
-- Установить настройки проекта
+- Перейти в папку проекта и установить настройки проекта
 - - Переименовать файл ```settings/local.py.example.py``` в ```settings/local.py```
-- - Заполнить в файле ```settings/local.py``` настройки базы данны и ключ апи
+- - Заполнить в файле ```settings/local.py``` настройки базы данны и ключ к апи ```openweathermap```
 
 - Запустить сервер
 ```  python3.8 main.py ```
