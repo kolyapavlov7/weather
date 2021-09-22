@@ -1,7 +1,9 @@
 # weather тестовое задание
 
 - Склонировать проект
-  git clone git@github.com:kolyapavlov7/weather.git
+'''
+git clone git@github.com:kolyapavlov7/weather.git
+'''
 
 - Создать пользователя, БД и таблицы
   sudo -u postgres psql
