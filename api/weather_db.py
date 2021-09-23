@@ -7,6 +7,7 @@ from psycopg2.extras import DictCursor
 class WeatherDBApi:
     def __init__(self, db_conf):
         self.db_conf = db_conf
+        self._check()
         
     def get_weather(self, country_code, city, date):
         country_id = self.get_country_id(country_code)
@@ -62,7 +63,18 @@ class WeatherDBApi:
         query = '''INSERT INTO weather (city_id, date, data) VALUES ({}, '{}', '{}');'''.format(city_id, date, data)
         self.__sql(query, response=False)
         return self.get_weather_data(city_id, date)
-        
+
+    def _check(self):
+        query = "SELECT * FROM information_schema.tables WHERE table_schema = 'public' AND table_catalog = '{}';".format(
+            self.db_conf['dbname']
+        )
+        rows = self.__sql(query, single=False)
+        if rows is None:
+            with open('init.sql', 'r') as file:
+                query = file.read()
+                self.__sql(query, response=False)
+
+
     def __sql(self, query, response=True, single=True):
         with psycopg2.connect(**self.db_conf) as conn:
             with conn.cursor(cursor_factory=DictCursor) as cursor:

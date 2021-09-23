@@ -37,8 +37,6 @@ class OpenWeatherMapApi:
                 break
         else:
             item = None
-        print(self.timestamp)
-        print(item)
         return item
 
     def _weather(self, lat, lon):
